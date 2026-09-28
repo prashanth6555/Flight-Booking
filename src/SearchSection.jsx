@@ -62,10 +62,21 @@ export default function SearchSection({ onSearch }) {
     <>
       <section className="hero">
         <div className="hero-copy">
-          <motion.h1 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55 }}>
-            Fly farther, land softer.
+          <motion.div
+            className="hero-kicker"
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+          >
+            ✦ Premium global network
+          </motion.div>
+          <motion.h1
+            initial={{ opacity: 0, y: 22 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          >
+            Fly farther, land <span className="gold">softer</span>.
           </motion.h1>
-          <motion.p initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15 }}>
+          <motion.p initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.18 }}>
             Search global routes, pick your cabin, and complete booking in a few fluid steps.
           </motion.p>
         </div>
@@ -102,8 +113,15 @@ export default function SearchSection({ onSearch }) {
             ['220+', 'destinations'],
             ['4.8', 'traveler rating'],
             ['35m', 'seats booked'],
-          ].map(([n, l]) => (
-            <motion.div key={l} className="stat" whileHover={{ y: -4 }}>
+          ].map(([n, l], i) => (
+            <motion.div
+              key={l}
+              className="stat"
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 + i * 0.08 }}
+              whileHover={{ y: -6, scale: 1.02 }}
+            >
               <strong>{n}</strong>
               <div className="muted">{l}</div>
             </motion.div>
@@ -147,6 +165,8 @@ export default function SearchSection({ onSearch }) {
               className="swap-btn"
               onClick={swap}
               animate={{ rotate: swapSpin }}
+              whileHover={{ scale: 1.08 }}
+              whileTap={{ scale: 0.92 }}
               transition={{ type: 'spring', stiffness: 260, damping: 18 }}
               aria-label="Swap cities"
             >
@@ -285,13 +305,21 @@ function CityMenu({ show, cities, onPick }) {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -8 }}
         >
-          {cities.map((c) => (
-            <button key={c.code} type="button" className="city-row" onClick={() => onPick(c)}>
+          {cities.map((c, i) => (
+            <motion.button
+              key={c.code}
+              type="button"
+              className="city-row"
+              initial={{ opacity: 0, x: -8 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: i * 0.03 }}
+              onClick={() => onPick(c)}
+            >
               <span>
                 {c.city}, {c.country}
               </span>
               <b>{c.code}</b>
-            </button>
+            </motion.button>
           ))}
         </motion.div>
       )}

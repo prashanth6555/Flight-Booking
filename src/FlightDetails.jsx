@@ -39,7 +39,9 @@ export default function FlightDetails({ flight, onClose, onBook }) {
               onClick={() => setOpen(open === id ? '' : id)}
             >
               <b>{title}</b>
-              <motion.span animate={{ rotate: open === id ? 180 : 0 }}>▾</motion.span>
+              <motion.span animate={{ rotate: open === id ? 180 : 0 }} transition={{ type: 'spring', stiffness: 300 }}>
+                ▾
+              </motion.span>
             </button>
             <AnimatePresence>
               {open === id && (

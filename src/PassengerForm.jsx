@@ -50,7 +50,10 @@ export default function PassengerForm({ count, onBack, onNext }) {
       <div className="progress">
         {STEPS.map((label, i) => (
           <span key={label} title={label}>
-            <motion.i animate={{ width: i <= step ? '100%' : '0%' }} transition={{ duration: 0.4 }} />
+            <motion.i
+              animate={{ width: i <= step ? '100%' : '0%' }}
+              transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+            />
           </span>
         ))}
       </div>

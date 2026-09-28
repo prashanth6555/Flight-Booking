@@ -37,7 +37,12 @@ export default function SeatSelection({ count, selected, setSelected, onBack, on
         <span style={{ color: '#4cc3ff' }}>Selected</span>
         <span style={{ color: '#fb7185' }}>Taken</span>
       </div>
-      <div className="cabin-map">
+      <motion.div
+        className="cabin-map"
+        initial={{ opacity: 0, scale: 0.96 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.45 }}
+      >
         {Array.from({ length: ROWS }, (_, r) => {
           const row = r + 1
           return (
@@ -53,7 +58,7 @@ export default function SeatSelection({ count, selected, setSelected, onBack, on
             </div>
           )
         })}
-      </div>
+      </motion.div>
       <div className="actions">
         <button type="button" className="primary" disabled={selected.length !== count} onClick={onNext}>
           Continue to payment
@@ -71,8 +76,8 @@ function Seat({ id, selected, taken, onToggle }) {
       className={`seat ${isSel ? 'selected' : ''} ${taken ? 'taken' : ''}`}
       disabled={taken}
       onClick={() => onToggle(id)}
-      whileHover={taken ? {} : { scale: 1.12, y: -2 }}
-      animate={isSel ? { scale: 1.12 } : { scale: 1 }}
+      whileHover={taken ? {} : { scale: 1.16, y: -3 }}
+      animate={isSel ? { scale: 1.16 } : { scale: 1 }}
       transition={{ type: 'spring', stiffness: 400, damping: 18 }}
     >
       {id.replace(/^\d+/, '')}

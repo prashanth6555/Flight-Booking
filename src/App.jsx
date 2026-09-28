@@ -8,6 +8,7 @@ import SeatSelection from './SeatSelection.jsx'
 import Payment from './Payment.jsx'
 import Confirmation from './Confirmation.jsx'
 import { searchFlights } from './data.js'
+import Atmosphere from './Atmosphere.jsx'
 import './App.css'
 
 const STEPS = ['Search', 'Flights', 'Passengers', 'Seats', 'Pay', 'Done']
@@ -61,16 +62,25 @@ export default function App() {
 
   return (
     <div className="app">
+      <Atmosphere />
       <header className="topbar">
-        <div className="brand">
-          <span className="brand-mark">✈</span>
+        <motion.div className="brand" initial={{ opacity: 0, x: -12 }} animate={{ opacity: 1, x: 0 }}>
+          <motion.span className="brand-mark" animate={{ rotate: [0, -8, 8, 0] }} transition={{ repeat: Infinity, duration: 6, ease: 'easeInOut' }}>
+            ✈
+          </motion.span>
           Aether Air
-        </div>
+        </motion.div>
         <nav className="stepper">
           {STEPS.map((s, i) => (
-            <span key={s} className={`step-chip ${i === stepIndex ? 'active' : ''} ${i < stepIndex ? 'done' : ''}`}>
+            <motion.span
+              key={s}
+              layout
+              className={`step-chip ${i === stepIndex ? 'active' : ''} ${i < stepIndex ? 'done' : ''}`}
+              animate={i === stepIndex ? { scale: 1.06 } : { scale: 1 }}
+              transition={{ type: 'spring', stiffness: 320, damping: 22 }}
+            >
               {s}
-            </span>
+            </motion.span>
           ))}
         </nav>
         <div className="top-meta">Demo booking · no payment charged</div>
@@ -79,10 +89,10 @@ export default function App() {
       <AnimatePresence mode="wait">
         <motion.main
           key={view}
-          initial={{ opacity: 0, y: 12 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -8 }}
-          transition={{ duration: 0.28 }}
+          exit={{ opacity: 0, y: -12 }}
+          transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
         >
           {view === 'search' && <SearchSection onSearch={runSearch} />}
           {view === 'results' && (

@@ -43,7 +43,7 @@ export default function Payment({ total, onBack, onPay }) {
             onClick={() => setMethod(m)}
             layout
             whileTap={{ scale: 0.96 }}
-            animate={{ y: method === m ? -4 : 0 }}
+            animate={{ y: method === m ? -6 : 0, scale: method === m ? 1.04 : 1 }}
           >
             {m}
           </motion.button>

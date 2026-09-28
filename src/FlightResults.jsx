@@ -132,10 +132,11 @@ export default function FlightResults({
                     layout
                     key={f.id}
                     className="flight-card"
-                    initial={{ opacity: 0, y: 16 }}
-                    animate={{ opacity: 1, y: 0 }}
+                    initial={{ opacity: 0, y: 22, scale: 0.98 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.96 }}
-                    whileHover={{ y: -4 }}
+                    whileHover={{ y: -6, scale: 1.01 }}
+                    transition={{ type: 'spring', stiffness: 280, damping: 22 }}
                   >
                     <div className="airline">
                       <span className="dot" style={{ background: f.airline.color }} />
@@ -153,7 +154,9 @@ export default function FlightResults({
                         <div className="muted" style={{ textAlign: 'center' }}>
                           {f.duration} · {f.stops ? `${f.stops} stop` : 'Nonstop'}
                         </div>
-                        <div className="route-line" />
+                        <div className="route-line">
+                          <span className="route-plane">✈</span>
+                        </div>
                       </div>
                       <div>
                         <strong>{f.arr}</strong>
